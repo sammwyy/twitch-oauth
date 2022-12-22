@@ -1,0 +1,66 @@
+{
+  "name": "twitch-oauth",
+  "author": "sammwy",
+  "description": "Authenticate users with Twitch.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.(js|ts)\"",
+    "lint": "eslint src --ext .js,.ts",
+    "lint:fix": "eslint src --fix --ext .js,.ts",
+    "test": "jest --config jest.config.js",
+    "prepare": "husky install && yarn build",
+    "prepublishOnly": "yarn test && yarn lint",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn test"
+    }
+  },
+  "module": "lib/index.js",
+  "dependencies": {
+    "isomorphic-unfetch": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "29.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.30.0",
+    "eslint-plugin-jest": "^27.1.7",
+    "husky": "^8.0.2",
+    "jest": "^29.3.1",
+    "prettier": "2.8.1",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.9.4"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammwyy/twitch-oauth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sammwyy/twitch-oauth/issues"
+  },
+  "keywords": [
+    "twitch",
+    "twitch-client",
+    "twitch-api",
+    "twitch-oauth",
+    "twitch-auth",
+    "oauth"
+  ]
+}
