@@ -1,5 +1,3 @@
-import qs from 'querystring';
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function jsonToURLEncoded(object: Record<string, any>) {
   const queries = [];
@@ -9,7 +7,7 @@ export function jsonToURLEncoded(object: Record<string, any>) {
       value = value.join(' ');
     }
 
-    queries.push(key + '=' + qs.escape(value));
+    queries.push(key + '=' + encodeURIComponent(value));
   }
   return queries.join('&');
 }
