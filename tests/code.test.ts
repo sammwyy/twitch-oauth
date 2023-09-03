@@ -25,7 +25,7 @@ test('Get auth token by code', async () => {
   const res = await twitch.verifyCodeResponse(code);
 
   expect(res.access_token).not.toBeNull();
-  expect(res.expired_in).not.toBeNull();
+  expect(res.expires_in).not.toBeNull();
   expect(res.refresh_token).not.toBeNull();
   expect(res.scope).not.toBeNull();
   expect(res.token_type).toBe('bearer');
