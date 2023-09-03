@@ -16,7 +16,7 @@ yarn add twitch-oauth
 
 ### As a ES Module
 
-```javascript
+```typescript
 import { TwitchOAuth } from 'twitch-oauth';
 
 // Initialize client.
@@ -36,8 +36,11 @@ const client = new TwitchOAuth({
 client.authenticate(); // Returns https://id.twitch.tv/oauth2/authorize?....
 
 // Get access and refresh token using the code that twitch sends the frontend.
-client.verifyCodeResponse(".......")
+client.verifyCodeResponse(access_token: string)
     .then(console.log);
+
+// Check if access token still valid.
+client.validate(access_token: string);
 ```
 
 ### As CJS Module
