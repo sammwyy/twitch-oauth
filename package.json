@@ -2,7 +2,7 @@
   "name": "twitch-oauth",
   "author": "sammwy",
   "description": "Authenticate users with Twitch.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

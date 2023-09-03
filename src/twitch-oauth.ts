@@ -1,7 +1,10 @@
 import fetch from 'isomorphic-unfetch';
+
 import { TwitchOAuthError } from './twitch-oauth-error';
 import { TwitchOAuthResponse } from './twitch-oauth-response';
 import { jsonToURLEncoded } from './utils';
+import { TwitchOAuthValidation } from './twitch-oauth-validation';
+import TwitchScope from './twitch-scope';
 
 type TwitchOAuthMethod = 'token' | 'code';
 
@@ -9,7 +12,7 @@ interface TwitchOAuthSettings {
   clientId: string;
   clientSecret: string;
   redirectUri: string;
-  scope: string[];
+  scope: TwitchScope[];
   method?: TwitchOAuthMethod;
 }
 
@@ -54,5 +57,21 @@ export class TwitchOAuth {
     }
 
     return res as TwitchOAuthResponse;
+  }
+
+  public async validate(accessToken: string): Promise<TwitchOAuthValidation> {
+    const req = await fetch('https://id.twitch.tv/oauth2/validate', {
+      headers: {
+        'Client-Id': this.settings.clientId,
+        Authorization: `bearer ${accessToken}`,
+      },
+    });
+
+    const res = await req.json();
+    if (res.message) {
+      throw new TwitchOAuthError(res.status, res.message);
+    }
+
+    return res as TwitchOAuthValidation;
   }
 }
