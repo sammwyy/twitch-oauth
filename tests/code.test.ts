@@ -3,6 +3,7 @@ dotenv.config();
 
 import { TwitchOAuth } from '../src';
 import { TwitchOAuthError } from '../src/twitch-oauth-error';
+import TwitchScope from '../src/twitch-scope';
 
 const clientId = process.env['TWITCH_CLIENT_ID'] as string;
 
@@ -10,7 +11,7 @@ const twitch = new TwitchOAuth({
   clientId,
   clientSecret: process.env['TWITCH_CLIENT_SECRET'] as string,
   redirectUri: process.env['TWITCH_REDIRECT_URI'] as string,
-  scope: process.env['TWITCH_SCOPE']?.split(' ') as string[],
+  scope: process.env['TWITCH_SCOPE']?.split(' ') as TwitchScope[],
 });
 
 test('Generate authentication link', () => {
