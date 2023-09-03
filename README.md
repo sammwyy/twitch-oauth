@@ -36,11 +36,14 @@ const client = new TwitchOAuth({
 client.authenticate(); // Returns https://id.twitch.tv/oauth2/authorize?....
 
 // Get access and refresh token using the code that twitch sends the frontend.
-client.verifyCodeResponse(access_token: string)
+client.verifyCodeResponse(code: string)
     .then(console.log);
 
 // Check if access token still valid.
 client.validate(access_token: string);
+
+// Refresh expired token.
+client.refresh(refresh_token: string);
 ```
 
 ### As CJS Module

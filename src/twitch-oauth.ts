@@ -74,4 +74,28 @@ export class TwitchOAuth {
 
     return res as TwitchOAuthValidation;
   }
+
+  public async refresh(refresh_token: string) {
+    const body = {
+      client_id: this.settings.clientId,
+      client_secret: this.settings.clientSecret,
+      grant_type: 'refresh_token',
+      refresh_token,
+    };
+
+    const req = await fetch('https://id.twitch.tv/oauth2/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: jsonToURLEncoded(body),
+    });
+
+    const res = await req.json();
+    if (res.message) {
+      throw new TwitchOAuthError(res.status, res.message);
+    }
+
+    return res as TwitchOAuthResponse;
+  }
 }
